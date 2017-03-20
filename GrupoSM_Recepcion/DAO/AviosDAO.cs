@@ -30,16 +30,6 @@ namespace GrupoSM_Recepcion.DAO
         BO.DS_MasterDatasetTableAdapters.AviosSubgruposTableAdapter aviossubgrupostabla;
         BO.DS_MasterDatasetTableAdapters.devuelvesubgruposcolorTableAdapter aviossubgrupos;
         
-        //                    id_avios int not null identity(100,1) primary key,						
-        //                    nombre varchar(max),
-        //                    tipo int not null,
-        //                    precio float
-        //                    id_avios_detalle int not null identity(100,1) primary key,							
-        //                    id_ficha int not null foreign key references ficha_tecnica(idficha_tecnica),
-        //                    id_avio int not null foreign key references avios(id_avios),
-        //                    cantidad float not null,
-        //                    costo float not null
-
         public int id_ficha_avio { get; set; }
         public int idavios { get; set; }
         public int idplantilla { get; set; }
@@ -56,46 +46,29 @@ namespace GrupoSM_Recepcion.DAO
         public double cantidadbodega { get; set; }
         public DateTime fecha { get; set; }
         public double cantidad_ficha { get; set; }
-        //Convert.ToInt32(numeroavio.GetData().Max().Column1);
-        
         public string Actualizaaviosproduccion()
         {
-            try
-            {
+            
                 querysadapter.actualizaavioproduccionsubgrupo(this.idavios, this.iddetalle);
                 return "Correcto";
-            }
-            catch
-            {
-                return "Error(ActualizaProducSubGrupos)";
-            }
+            
         }
 
         public string eliminaaviossubgruposcolor()
         {
-            try
-            {
+           
                 querysadapter.eliminaaviossubgrupos(this.idavios);
                 return "Correcto";
-            }
-            catch
-            {
-                return "Error(eliminaviossubgrupos)";
-            }
+           
         }
 
         public string ingresaaviossubgrupos()
         {
-            try
-            {
+            
                 aviossubgrupostabla = new GrupoSM_Recepcion.BO.DS_MasterDatasetTableAdapters.AviosSubgruposTableAdapter();
                 aviossubgrupostabla.Insert(this.idavios, this.iddetalle);
                 return "Correcto";
-            }
-            catch
-            {
-                return "Error(ingresasubgrupos)";
-            }
+            
         }
 
         public DataTable devuelveaviossubgruposcolor()
@@ -144,30 +117,19 @@ namespace GrupoSM_Recepcion.DAO
 
         public string insertaaviosplantilla()
         {
-            try
-            {
+           
 
                 querysadapter.insertaplantilla_avios(this.idplantilla, this.idavios, this.cantidad, this.costo);
                 return "Correcto";
-            }
-            catch(Exception ex)
-            {
-                return ex.ToString();
-            }
+           
         }
 
         public string eliminaaviosplantilla()
         {
-            try
-            {
-
+            
                 querysadapter.eliminaplantilla_avios(this.idplantilla, this.idavios);
                 return "Correcto";
-            }
-            catch
-            {
-                return "Error(eliminaaviosplantilla)";
-            }
+            
         }
 
         public DataTable aviosproduc()
@@ -177,29 +139,19 @@ namespace GrupoSM_Recepcion.DAO
 
         public string actualizabodegaavios()
         {
-            try
-            {
+            
                 int numero = Convert.ToInt32(this.cantidad);
                 querysadapter.actualizabodegaavios(this.idavios, numero);
                 return "Correcto";
-            }
-            catch
-            {
-                return "A habido un error";
-            }
+           
         }
 
         public string eliminaaviosproduccion()
         {
-            try
-            {
+            
                 querysadapter.eliminaaviosproduccion(this.idproduccion);
                 return "Correcto";
-            }
-            catch
-            {
-                return "A habido un error";
-            }
+           
         }
 
         public string actualizabodega_avios()
@@ -226,17 +178,12 @@ namespace GrupoSM_Recepcion.DAO
 
         public string ingresacoloravios()
         {
-            try
-            {
+            
                 tablacoloravios = new GrupoSM_Recepcion.BO.DS_MasterDatasetTableAdapters.ColorAvioTableAdapter();
                 int numero = numero_avios_produccion();
                 tablacoloravios.Insert(numero, this.Color);
                 return "Correcto";
-            }
-            catch
-            {
-                return "Error de coneccion";
-            }
+           
         }
 
         public DataTable sacar_avios()
@@ -256,28 +203,18 @@ namespace GrupoSM_Recepcion.DAO
 
         public string agregar_avios()
         {
-            try
-            {
+            
                 tablaavios.Insert(this.nombre, this.tipo, Convert.ToDouble(this.precio));
                 return "Agregado Correctamente";
-            }
-            catch
-            {
-                return "Error de coneccion";
-            }
+            
         }
 
         public string agregar_detalle()
         {
-            try
-            {
+           
                 querysadapter.insertaficha_avios(this.id_ficha_avio, this.idavios, Math.Round((this.cantidad), 2), this.costo);
                 return "Agregado Correctamente";
-            }
-            catch(Exception ex) 
-            {
-                return ex.ToString();
-            }
+            
         }
 
         public DataTable sacartodosavios()
@@ -287,28 +224,18 @@ namespace GrupoSM_Recepcion.DAO
 
         public string actualizaavios()
         {
-            try
-            {
+            
                 querysadapter.actualiza_avios(this.idavios, this.nombre, this.tipo, this.precio);
                 return "Actualizado";
-            }
-            catch
-            {
-                return "Error de coneccion";
-            }
+            
         }
 
         public string ingresaavios_produccion()
         {
-            try
-            {
+           
                 tablaaviosproduccion.Insert(this.idavios, this.idproduccion, this.cantidad, this.cantidad_ficha);
                 return "Agregado";
-            }
-            catch
-            {
-                return "Error de coneccion";
-            }
+            
         }
 
         public int existe_produccionavios()
@@ -320,30 +247,19 @@ namespace GrupoSM_Recepcion.DAO
 
         public string verificaavios()
         {
-            try
-            {
+           
                 querysadapter.verificaordenavios(this.idproduccion, this.id_ficha_avio, this.fecha);
                 return "Agregado";
-            }
-            catch
-            {
-                return "Error de coneccion";
-            }
+           
         }
 
 
         public string actualizaavios_bodegaasignaciones()
         {
-            try
-            {
-
+            
                 querysadapter.actualiza_bodega_asignaciones(this.idavios, this.idproduccion, Math.Round((this.cantidadasignada), 2), Math.Round((this.cantidadbodega), 2), this.iddetalle);
                 return "Correcto";
-            }
-            catch
-            {
-                return "Error de coneccion";
-            }
+           
         }
 
         public DataTable busca_aviosportipo()
@@ -358,15 +274,10 @@ namespace GrupoSM_Recepcion.DAO
 
         public string borra_avioficha()
         {
-            try
-            {
+           
                 querysadapter.borra_aviosficha(this.idavios, this.id_ficha_avio);
                 return "Borrado";
-            }
-            catch
-            {
-                return "Error de coneccion";
-            }
+            
         }
 
         public DataTable buscatipobodega()
